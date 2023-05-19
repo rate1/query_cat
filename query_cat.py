@@ -1,13 +1,17 @@
 import csv
 import re
+import os.path
 from settings_query_cat import cat_keywords
 
 
 def csv_reader(filename: str) -> list:
     """Чтение csv-файла и построчная запись содержимого в список"""
-    with open(filename, 'r') as csv_file:
-        reader = csv.reader(csv_file)
-        result = list(reader)
+    try:
+        with open(filename, 'r') as csv_file:
+            reader = csv.reader(csv_file)
+            result = list(reader)
+    except:
+        return None
     return result
 
 
@@ -37,10 +41,19 @@ def query_categorization(keywords: dict, user_letters: list) -> dict:
 
 
 def main() -> None:
-    csv_filename = input("Введите имя *.csv файла для парсинга: ")
+    while(True):
+        csv_filename = input("Введите имя csv-файла с письмами пользователей: ")
+        if os.path.exists(csv_filename):
+            break
+        print("Файл не найден.")
+
     user_letters = csv_reader(csv_filename)
-    results = query_categorization(cat_keywords, user_letters)
-    csv_writer("result.csv", results)
+    if user_letters:
+        results = query_categorization(cat_keywords, user_letters)
+        csv_writer("result.csv", results)
+        print("Результат категоризации запросов сохранен в файл result.csv")
+    else:
+        print("Csv-файл содержит не корректные данные")
 
 
 if __name__ == '__main__':
