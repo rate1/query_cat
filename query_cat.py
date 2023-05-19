@@ -28,8 +28,8 @@ def query_categorization(keywords: dict, user_letters: list) -> dict:
         categories = []
         for category, keywords in cat_keywords.items():
             for keyword in keywords:
-                reg_exp = r"\b{}".format(keyword[:-1])
-                if re.findall(reg_exp, user_letter):
+                reg_exp = r"\b{}".format(keyword[:-1]).lower()
+                if re.findall(reg_exp, user_letter.lower()):
                     categories.append(category)
                     break
         results[user_letter] = categories
