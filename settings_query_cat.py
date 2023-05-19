@@ -1,10 +1,10 @@
 cat_keywords = {
-            "Security": ["key1", "key2"],
-            "Refunds": ["key1", "key2"],
-            "Troubleshooting": ["key1", "key2"],
-            "Account": ["key1", "key2"],
+            "Security": ["пароль", "безопасность"],
+            "Refunds": ["возврат", "вернуть"],
+            "Troubleshooting": ["ошибка", "неправильно", "проблема", "некорректно", "задержка", "не работает"],
+            "Account": ["аккаунт", "авторизованный"],
             "Advertising and Coolaboration": ["key1", "key2"],
-            "Limits": ["key1", "key2"],
-            "Payments": ["key1", "key2"],
-            "Features": ["функциональность", "key2"],
+            "Limits": ["лимит", "key2"],
+            "Payments": ["подписка", "оплатить", "qr", "счет"],
+            "Features": ["функциональность", "можно", "api"],
             }
