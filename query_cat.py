@@ -1,5 +1,6 @@
 import csv
-from settings_query_cat import keywords
+import re
+from settings_query_cat import cat_keywords
 
 
 def csv_reader(filename: str) -> list:
@@ -19,13 +20,24 @@ def csv_writer(filename: str, results: dict) -> None:
 def query_categorization(keywords: dict, user_letters: list) -> dict:
     """Категоризация списка текстовых значений в соответствии со словарем
     ключевых слов"""
-    pass
+    results = {}
+    for user_letter in user_letters:
+        categories = []
+        for category, keywords in cat_keywords.items():
+            for keyword in keywords:
+                reg_exp = r"\b{}".format(keyword)
+                if re.findall(reg_exp, str(user_letter)):
+                    categories.append(category)
+                    break
+        results[str(user_letter)] = categories
+    return results
+
 
 
 def main() -> None:
     csv_filename = input("Введите имя *.csv файла для парсинга: ")
     user_letters = csv_reader(csv_filename)
-    results = query_categorization(keywords, user_letters)
+    results = query_categorization(cat_keywords, user_letters)
     csv_writer("result.csv", results)
 
 
