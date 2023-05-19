@@ -3,14 +3,22 @@ from settings_query_cat import keywords
 
 
 def csv_reader(filename: str) -> list:
-    pass
+    """Чтение csv-файла и построчная запись содержимого в список"""
+    with open(filename, 'r') as csv_file:
+        reader = csv.reader(csv_file)
+        result = list(reader)
+
+    return result
 
 
 def csv_writer(filename: str, results: dict) -> None:
+    """Запись словаря в csv-файл в формате: ключ;значение"""
     pass
 
 
 def query_categorization(keywords: dict, user_letters: list) -> dict:
+    """Категоризация списка текстовых значений в соответствии со словарем
+    ключевых слов"""
     pass
 
 
