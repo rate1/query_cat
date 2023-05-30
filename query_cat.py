@@ -16,7 +16,7 @@ def csv_reader(filename: str) -> list:
 
 
 def csv_writer(filename: str, results: dict) -> None:
-    """Запись словаря результатов в csv-файл в формате: ключ;список значений"""
+    """Запись словаря результатов в csv-файл в формате: ключ(письмо пользователя);категория(самое релевантное из значений)"""
     with open(filename, 'w', encoding='utf-8-sig') as csv_file:
         writer = csv.writer(csv_file, delimiter=';')
         for letter, categories in results.items():
