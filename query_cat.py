@@ -1,7 +1,7 @@
 import csv
 import re
 import os.path
-from settings_query_cat import cat_keywords
+from settings_query_cat import CAT_KEYWORDS
 
 
 def csv_reader(filename: str) -> list:
@@ -16,7 +16,7 @@ def csv_reader(filename: str) -> list:
 
 
 def csv_writer(filename: str, results: dict) -> None:
-    """Запись словаря результатов в csv-файл в формате: ключ(письмо пользователя);категория(самое релевантное из значений)"""
+    """Запись словаря результатов в csv-файл в формате: ключ(письмо пользователя);категория(самое релевантное из значений"""
     with open(filename, 'w', encoding='utf-8-sig') as csv_file:
         writer = csv.writer(csv_file, delimiter=';')
         for letter, categories in results.items():
@@ -30,7 +30,7 @@ def query_categorization(keywords: dict, user_letters: list) -> dict:
     for user_letter in user_letters:
         user_letter = user_letter[0]
         categories = []
-        for category, keywords in cat_keywords.items():
+        for category, keywords in CAT_KEYWORDS.items():
             for keyword in keywords:
                 reg_exp = r"\b{}\w{}\b".format(keyword[:-1], "{0,3}").lower()
                 if re.findall(reg_exp, user_letter.lower()):
@@ -49,7 +49,7 @@ def main() -> None:
 
     user_letters = csv_reader(csv_filename)
     if user_letters:
-        results = query_categorization(cat_keywords, user_letters)
+        results = query_categorization(CAT_KEYWORDS, user_letters)
         csv_writer("result.csv", results)
         print("Результат категоризации запросов сохранен в файл result.csv")
     else:
