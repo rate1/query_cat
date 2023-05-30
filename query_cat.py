@@ -20,7 +20,7 @@ def csv_writer(filename: str, results: dict) -> None:
     with open(filename, 'w', encoding='utf-8-sig') as csv_file:
         writer = csv.writer(csv_file, delimiter=';')
         for letter, categories in results.items():
-            writer.writerow([letter, categories])
+            writer.writerow([letter, categories[0]])
 
 
 def query_categorization(keywords: dict, user_letters: list) -> dict:
@@ -32,7 +32,7 @@ def query_categorization(keywords: dict, user_letters: list) -> dict:
         categories = []
         for category, keywords in cat_keywords.items():
             for keyword in keywords:
-                reg_exp = r"\b{}".format(keyword[:-1]).lower()
+                reg_exp = r"\b{}\w{}\b".format(keyword[:-1], "{0,3}").lower()
                 if re.findall(reg_exp, user_letter.lower()):
                     categories.append(category)
                     break
